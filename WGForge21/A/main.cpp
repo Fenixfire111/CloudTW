@@ -39,8 +39,10 @@ int main() {
         for (int kJ = 0; kJ < n-1; ++kJ) {
           tempSumTime += t1[kJ];
           if(s[minNumS] <= tempSumTime){
-            t1[a[minNumS] + kJ] += T[minNumS];
-            break;
+            if((a[minNumS] + kJ) < (n - 1)){
+              t1[a[minNumS] + kJ] += T[minNumS];
+              break;
+            }
           }
         }
       }
