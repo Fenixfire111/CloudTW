@@ -17,35 +17,40 @@ int main() {
   }
 
   std::vector<double> numbers;
-
+  double minNumS;
   for (int kI = 0; kI < m; ++kI) {
-    double minNumS = 0;
+    int flagG = 1;
     for (int kJ = 0; kJ < m; ++kJ) {
       int flag = 0;
-      if(s[kJ] <= s[minNumS]){
-        for (int number : numbers) {
-          if(kJ == number){
-            flag = 1;
-          }
+      for (int number : numbers) {
+        if(kJ == number){
+          flag = 1;
+          break;
         }
-        if(flag != 1){
+      }
+      if(flag != 1){
+        if(flagG == 1){
+          minNumS = kJ;
+          flagG = 0;
+        } else if(s[kJ] <= s[minNumS]){
           minNumS = kJ;
         }
       }
     }
     numbers.push_back(minNumS);
-      if((a[minNumS] < n-1) && (a[minNumS] != -1)){
-        double tempSumTime = 0;
-        for (int kJ = 0; kJ < n-1; ++kJ) {
-          tempSumTime += t1[kJ];
-          if(s[minNumS] <= tempSumTime){
-            if((a[minNumS] + kJ) < (n - 1)){
-              t1[a[minNumS] + kJ] += T[minNumS];
-              break;
-            }
+
+    if((a[minNumS] < n-1) && (a[minNumS] != -1)){
+      double tempSumTime = 0;
+      for (int kJ = 0; kJ < n-1; ++kJ) {
+        tempSumTime += t1[kJ];
+        if(s[minNumS] <= tempSumTime){
+          if((a[minNumS] + kJ) < (n - 1)){
+            t1[a[minNumS] + kJ] += T[minNumS];
+            break;
           }
         }
       }
+    }
   }
 
   double sumTime = 0;
